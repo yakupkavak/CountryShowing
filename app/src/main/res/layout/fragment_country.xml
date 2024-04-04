@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".view.CountryFragment">
+    <ImageView
+        android:layout_width="150dp"
+        android:src="@color/cardview_dark_background"
+        android:layout_height="150dp"
+        android:id="@+id/fragmentCountryView"
+        android:scaleType="fitCenter"
+        >
+    </ImageView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Country Name"
+        android:id="@+id/fragmentCountryName"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp">
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Country Capital"
+        android:id="@+id/fragmentCountryCapital"
+        android:padding="10dp"
+        android:textSize="16sp">
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Country Region"
+        android:id="@+id/fragmentCountryRegion"
+        android:padding="10dp"
+        android:textSize="16sp">
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Country Currency"
+        android:id="@+id/fragmentCountryCurrency"
+        android:padding="10dp"
+        android:textSize="16sp">
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Country Language"
+        android:id="@+id/fragmentCountryLanguage"
+        android:padding="10dp"
+        android:textSize="16sp">
+    </TextView>
+
+
+
+</LinearLayout>
+</layout>
