@@ -49,8 +49,10 @@ dependencies {
     val roomVersion = "2.2.3"
     val navVersion = "2.2.1"
     val preferencesVersion = "1.1.0"
+    val room_version = "2.6.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -76,7 +78,7 @@ dependencies {
 
     implementation("io.reactivex.rxjava2:rxjava:$rxJavaVersion")
     implementation("io.reactivex.rxjava2:rxandroid:$rxJavaVersion")
-
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
     //implementation("com.android.support:palette-v7:$supportVersion")
