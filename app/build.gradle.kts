@@ -77,7 +77,7 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxjava:$rxJavaVersion")
     implementation("io.reactivex.rxjava2:rxandroid:$rxJavaVersion")
 
-    //implementation("com.github.bumptech.glide:glide:$glideVersion")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     //implementation("com.android.support:palette-v7:$supportVersion")
     //implementation("com.android.support:design:$supportVersion")
