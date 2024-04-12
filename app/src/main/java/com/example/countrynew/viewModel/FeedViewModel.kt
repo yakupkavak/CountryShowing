@@ -1,15 +1,19 @@
 package com.example.countrynew.viewModel
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.countrynew.model.Country
 import com.example.countrynew.service.CountryAPIService
+import com.example.countrynew.service.CountryDatabase
+import com.example.countrynew.viewmodel.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 
-class FeedViewModel : ViewModel(){
+class FeedViewModel(application: Application) : BaseViewModel(application){
 
     private val countryApiService = CountryAPIService()
     private val disposable = CompositeDisposable( )
@@ -41,9 +45,7 @@ class FeedViewModel : ViewModel(){
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<ArrayList<Country>>(){
                     override fun onSuccess(t: ArrayList<Country>) {
-                        countries.value = t
-                        countryError.value = false
-                        countryLoading.value = false
+                        storeInSQLite(t)
                     }
 
                     override fun onError(e: Throwable) {
@@ -57,6 +59,27 @@ class FeedViewModel : ViewModel(){
 
         )
 
+    }
+
+    private fun showCountries(countryList : ArrayList<Country>){
+        countries.value = countryList
+        countryError.value = false
+        countryLoading.value = false
+    }
+    private fun storeInSQLite(countryList : ArrayList<Country>){
+        //INSERT ALL FONKSİYONU DATABASEYE VERİLEN OBJELERE OTOMATİK UUİD TANIMLIYOR
+        //BU TANIMLANAN UUIDLERİ BİZLERİN countryList'ine ekleyip tanımlıyoruz
+        launch {
+            val dao = CountryDatabase(getApplication()).countryDao()
+            dao.deleteAllCountries()
+            val listLong = dao.insertAll(*countryList.toTypedArray())
+            var i = 0
+            while (i < listLong.size){
+                countryList[i].uuid = listLong[i].toInt()
+                i ++
+            }
+            showCountries(countryList)
+        }
     }
 
 }

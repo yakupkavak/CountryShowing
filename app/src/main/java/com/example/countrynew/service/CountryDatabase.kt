@@ -1,12 +1,12 @@
 package com.example.countrynew.service
 
 import android.content.Context
-import android.graphics.ColorSpace.Model
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.countrynew.model.Country
 
-@Database(entities = arrayOf(Model::class), version = 1)
+@Database(entities = arrayOf(Country::class), version = 1)
 abstract class CountryDatabase: RoomDatabase() {
 
     abstract fun countryDao(): CountryDao
@@ -31,7 +31,7 @@ abstract class CountryDatabase: RoomDatabase() {
 
 
 
-        private fun makeDatabase(context: Context) = Room.databaseBuilder(context,
-            CountryDatabase::class.java,"countrydatabase").build()
+        private fun makeDatabase(context: Context) = Room.databaseBuilder(
+            context.applicationContext, CountryDatabase::class.java,"countrydatabase").build()
     }
 }

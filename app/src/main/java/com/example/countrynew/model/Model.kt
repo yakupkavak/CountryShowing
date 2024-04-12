@@ -32,5 +32,5 @@ data class Country(
     ){
 
     @PrimaryKey(autoGenerate = true)
-    var uuid = 0
+    var uuid = 0 //bu constructor içinde olmadıgı için tek tek tanımlaması yapılıyor
 }

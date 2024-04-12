@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
+    kotlin("kapt")
 }
 
 android {
@@ -21,6 +22,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    kapt {
+        correctErrorTypes = true
+        includeCompileClasspath = false
+    }
+
 
     buildTypes {
         release {
@@ -61,11 +67,13 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.google.guava:guava:30.1-jre")
     //implementation("android.arch.lifecycle:extensions:$lifeCycleExtensionVersion")
+    annotationProcessor("android.arch.persistence.room:compiler:1.1.1")
 
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
@@ -84,4 +92,5 @@ dependencies {
     //implementation("com.android.support:palette-v7:$supportVersion")
     //implementation("com.android.support:design:$supportVersion")
     implementation("androidx.preference:preference:$preferencesVersion")
+
 }
