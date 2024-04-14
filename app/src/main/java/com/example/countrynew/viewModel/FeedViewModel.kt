@@ -19,24 +19,36 @@ class FeedViewModel(application: Application) : BaseViewModel(application){
     private val countryApiService = CountryAPIService()
     private val disposable = CompositeDisposable()
     private var customSharedPreferences = CustomSharedPreferences(getApplication())
+    private var refreshTime = 10*60*1000*1000*1000L
 
     //dataların liveData tanımlayıp verileri bağlama işlemi burada yapılır
-    val countries = MutableLiveData<ArrayList<Country>>()
+    val countries = MutableLiveData<List<Country>>()
     val countryError = MutableLiveData<Boolean>()
     val countryLoading = MutableLiveData<Boolean>()
 
     fun refreshData(){
-        /* val country = Country("turkey","asia","ankara","tl","türkçe","15421")
-        val country1 = Country("turkey1","asi1a","ankar1a","1tl","türk1çe","15421")
+       val updateTime = customSharedPreferences.getTime()
+        if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime){
+            getDataFromSQL()
+            println("from sql")
+        }
+        else{
+            println("from api")
+            getDataFromAPI()
+        }
 
-        val countryList = arrayListOf<Country>(country,country1)
-        countries.value = countryList
-        countryError.value = false
-        countryLoading.value = false
+    }
 
-         */
+    fun refreshFromAPI(){
         getDataFromAPI()
+    }
 
+    private fun getDataFromSQL(){
+        countryLoading.value = true
+        launch {
+            val countries = CountryDatabase(getApplication()).countryDao().getAllCountries()
+            showCountries(countries)
+        }
     }
 
     private fun getDataFromAPI(){
@@ -63,7 +75,7 @@ class FeedViewModel(application: Application) : BaseViewModel(application){
 
     }
 
-    private fun showCountries(countryList : ArrayList<Country>){
+    private fun showCountries(countryList : List<Country>){
         countries.value = countryList
         countryError.value = false
         countryLoading.value = false
@@ -85,6 +97,11 @@ class FeedViewModel(application: Application) : BaseViewModel(application){
         }
 
         customSharedPreferences.saveTime(System.nanoTime())
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
 
 }

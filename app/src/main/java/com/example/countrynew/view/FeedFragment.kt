@@ -10,6 +10,7 @@ import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.countrynew.adapter.CountryAdapter
 import com.example.countrynew.databinding.FragmentFeedBinding
+import com.example.countrynew.model.Country
 import com.example.countrynew.viewModel.FeedViewModel
 
 class FeedFragment : Fragment() {
@@ -18,6 +19,7 @@ class FeedFragment : Fragment() {
 
     private lateinit var viewModel: FeedViewModel
     private val countryAdapter = CountryAdapter(arrayListOf())
+    private var arrayList = ArrayList<Country>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +42,7 @@ class FeedFragment : Fragment() {
             binding.countryRecyclerList.visibility = View.GONE
             binding.errorText.visibility = View.GONE
             binding.progressBar.visibility = View.GONE
-            viewModel.refreshData()
+            viewModel.refreshFromAPI()
             binding.refreshLayout.isRefreshing = false
 
         }
@@ -55,8 +57,10 @@ class FeedFragment : Fragment() {
     private fun observeLiveData(){
         viewModel.countries.observe(viewLifecycleOwner){
             it?.let {countries ->
+                arrayList.clear()
+                arrayList.addAll(countries)
                 binding.countryRecyclerList.visibility = View.VISIBLE
-                countryAdapter.updateCountryList(countries)
+                countryAdapter.updateCountryList(arrayList)
             }
         }
 

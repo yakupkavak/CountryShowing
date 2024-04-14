@@ -32,5 +32,8 @@ class CustomSharedPreferences {
             putLong(PREFERENCES_TIME,long)
         }
     }
+    fun getTime(): Long? {
+        return sharedPreferences?.getLong(PREFERENCES_TIME,0)
+    }
 
     }
