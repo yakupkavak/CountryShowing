@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.countrynew.model.Country
 import com.example.countrynew.service.CountryAPIService
 import com.example.countrynew.service.CountryDatabase
+import com.example.countrynew.util.CustomSharedPreferences
 import com.example.countrynew.viewmodel.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
 class FeedViewModel(application: Application) : BaseViewModel(application){
 
     private val countryApiService = CountryAPIService()
-    private val disposable = CompositeDisposable( )
+    private val disposable = CompositeDisposable()
+    private var customSharedPreferences = CustomSharedPreferences(getApplication())
 
     //dataların liveData tanımlayıp verileri bağlama işlemi burada yapılır
     val countries = MutableLiveData<ArrayList<Country>>()
@@ -66,6 +68,7 @@ class FeedViewModel(application: Application) : BaseViewModel(application){
         countryError.value = false
         countryLoading.value = false
     }
+
     private fun storeInSQLite(countryList : ArrayList<Country>){
         //INSERT ALL FONKSİYONU DATABASEYE VERİLEN OBJELERE OTOMATİK UUİD TANIMLIYOR
         //BU TANIMLANAN UUIDLERİ BİZLERİN countryList'ine ekleyip tanımlıyoruz
@@ -80,6 +83,8 @@ class FeedViewModel(application: Application) : BaseViewModel(application){
             }
             showCountries(countryList)
         }
+
+        customSharedPreferences.saveTime(System.nanoTime())
     }
 
 }
