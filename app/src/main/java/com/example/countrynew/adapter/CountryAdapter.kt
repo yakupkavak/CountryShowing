@@ -28,7 +28,8 @@ class CountryAdapter(val countryList: ArrayList<Country>): RecyclerView.Adapter<
         holder.binding.countryName.text = countryList[position].countryName
         holder.binding.countryRegion.text = countryList[position].countryRegion
         holder.binding.imageView.setOnClickListener {
-            val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
+            val myUUid = countryList[position].uuid
+            val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment(myUUid)
             Navigation.findNavController(it).navigate(action)
         }
         holder.binding.imageView.createImageDownload(countryList[position].countryFlagUrl,

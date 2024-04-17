@@ -16,7 +16,7 @@
         <argument
             android:name="uuid"
             app:argType="integer"
-            android:defaultValue="0" />
+            />
     </fragment>
     <fragment
         android:id="@+id/feedFragment"
@@ -25,6 +25,7 @@
         tools:layout="@layout/fragment_feed" >
         <action
             android:id="@+id/action_feedFragment_to_countryFragment"
-            app:destination="@id/countryFragment" />
+            app:destination="@id/countryFragment" >
+        </action>
     </fragment>
 </navigation>

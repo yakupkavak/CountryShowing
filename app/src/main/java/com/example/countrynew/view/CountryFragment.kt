@@ -36,8 +36,10 @@ class CountryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
+            println("uuid girdi")
             countryUuid = CountryFragmentArgs.fromBundle(it).uuid
         }
+        println("uuid girdi")
 
         viewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
         viewModel.getDataFromRoom(countryUuid)
