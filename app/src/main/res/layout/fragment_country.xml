@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="country"
+            type="com.example.countrynew.model.Country" />
+    </data>
+
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -11,16 +17,16 @@
     tools:context=".view.CountryFragment">
     <ImageView
         android:layout_width="150dp"
-        android:src="@color/cardview_dark_background"
         android:layout_height="150dp"
         android:id="@+id/fragmentCountryView"
+        android:downloadUrl="@{country.countryFlagUrl}"
         android:scaleType="fitCenter"
         >
     </ImageView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Country Name"
+        android:text="@{country.countryName}"
         android:id="@+id/fragmentCountryName"
         android:padding="10dp"
         android:textStyle="bold"
@@ -29,7 +35,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Country Capital"
+        android:text="@{country.countryCapital}"
         android:id="@+id/fragmentCountryCapital"
         android:padding="10dp"
         android:textSize="16sp">
@@ -37,7 +43,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Country Region"
+        android:text="@{country.countryRegion}"
         android:id="@+id/fragmentCountryRegion"
         android:padding="10dp"
         android:textSize="16sp">
@@ -45,7 +51,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Country Currency"
+        android:text="@{country.countryRegion}"
         android:id="@+id/fragmentCountryCurrency"
         android:padding="10dp"
         android:textSize="16sp">
@@ -53,7 +59,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Country Language"
+        android:text="@{country.countryLanguage}"
         android:id="@+id/fragmentCountryLanguage"
         android:padding="10dp"
         android:textSize="16sp">

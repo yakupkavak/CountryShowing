@@ -9,6 +9,7 @@ plugins {
 android {
     namespace = "com.example.countrynew"
     compileSdk = 34
+
     dataBinding {
         enable = true
     }
